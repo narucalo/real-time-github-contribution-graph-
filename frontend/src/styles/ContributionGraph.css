@@ -1,0 +1,13 @@
+#contributionGraph {
+    width: 800px; /* adjust the width as needed */
+    height: 400px; /* adjust the height as needed */
+    margin: 40px auto; /* center the chart */
+    border: 1px solid #ddd; /* add a border */
+    border-radius: 10px; /* add some rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* add some depth */
+  }
+  
+  #contributionGraph canvas {
+    width: 100%; /* make the canvas full width */
+    height: 100%; /* make the canvas full height */
+  }

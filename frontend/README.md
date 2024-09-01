@@ -1,0 +1,1 @@
+npm install d3 axios socket.io-client styled-components @testing-library/react jest --save-dev

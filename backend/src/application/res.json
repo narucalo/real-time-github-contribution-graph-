@@ -1,0 +1,24 @@
+{
+    "contributions": [
+      {
+        "date": "2022-01-01",
+        "commits": 5,
+        "pullRequests": 2,
+        "issues": 1,
+        "codeReviews": 0
+      },
+      {
+        "date": "2022-01-02",
+        "commits": 3,
+        "pullRequests": 1,
+        "issues": 0,
+        "codeReviews": 1
+      }
+    ],
+    "metadata": {
+      "username": "johnDoe",
+      "repository": "myRepo",
+      "timeframe": "2022-01-01 to 2022-01-31"
+    }
+  }
+  

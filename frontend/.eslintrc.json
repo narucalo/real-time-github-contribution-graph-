@@ -1,0 +1,23 @@
+{
+    "extends": ["react-app", "eslint:recommended", "plugin:react/recommended"],
+    "plugins": ["react"],
+    "rules": {
+      "react/prop-types": "off",
+      "no-unused-vars": "warn",
+      "react/react-in-jsx-scope": "off",
+      "no-console": "off"
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2021": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    }
+  }
+  
