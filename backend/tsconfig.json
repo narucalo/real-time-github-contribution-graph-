@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", 
+    "target": "es2017", 
+    "strict": true,
+    "esModuleInterop": true 
+  },
+  "include": [
+    "./src/**/*.js",      
+    "./src/**/*.ts",     
+    "./src/**/*.tsx",   
+    "./src/**/*.jsx"     
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

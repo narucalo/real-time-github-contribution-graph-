@@ -1,5 +1,3 @@
-// frontend/src/components/index.js
-
 import ContributionGraph from "./ContributionGraph";
 import ContributionStats from "./ContributionStats";
 import GitHubUserProfile from "./GitHubUserProfile";

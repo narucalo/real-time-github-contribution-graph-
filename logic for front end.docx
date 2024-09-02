@@ -1,0 +1,67 @@
+1. User Requests Data
+•	Frontend (React.js)
+o	The user opens the web application, which immediately sends a request to the backend to fetch the latest GitHub contribution data for a specific user.
+o	The frontend may also set up a WebSocket connection to receive real-time updates on contributions.
+2. Backend Receives Request
+•	API Request Handling
+o	The backend, built with Express.js, receives the request to fetch contribution data.
+o	The backend parses the request, extracting parameters like the GitHub username and the time range for contributions.
+•	Cache Check
+o	Before querying GitHub, the backend checks if the data is already cached in Redis to avoid redundant API calls.
+o	If cached data is available, it is returned directly to the frontend.
+3. Fetch Data from GitHub API
+•	API Integration
+o	If the data is not in the cache, the backend uses the GitHub REST or GraphQL API to fetch the required contribution data.
+o	The API request includes authentication via a GitHub token stored in environment variables.
+•	Data Parsing
+o	The backend parses the response from the GitHub API, extracting relevant contribution data like commits, pull requests, issues, and code reviews.
+4. Process and Aggregate Data
+•	Data Aggregation
+o	The backend processes the raw data to aggregate contributions by date.
+o	It may also filter, sort, and format the data to fit the frontend’s requirements (e.g., organizing contributions into a format suitable for a heatmap).
+•	Cache Data
+o	The processed data is cached in Redis with an expiration time to improve the performance of subsequent requests.
+5. Return Data to Frontend
+•	API Response
+o	The backend sends the aggregated data back to the frontend in a JSON format.
+o	This data includes details like the number of contributions per day and types of contributions.
+6. Render Data on Frontend
+•	Data Visualization
+o	The frontend, using React.js and D3.js, receives the data and renders it as a visual graph or heatmap.
+o	The visualization shows contributions over time, with color intensity indicating the number of contributions.
+•	WebSocket Updates
+o	If WebSocket communication is enabled, the frontend listens for real-time updates from the backend.
+o	When new data is received via WebSocket, the frontend dynamically updates the graph to reflect the latest contributions.
+7. Real-Time Updates
+•	WebSocket Communication
+o	The backend periodically polls GitHub or listens for events (e.g., using GitHub webhooks) to detect new contributions.
+o	When new contributions are detected, the backend sends the updated data to all connected frontend clients via WebSocket.
+8. Error Handling
+•	Frontend
+o	The frontend includes error handling to manage issues like failed data retrieval or WebSocket disconnections.
+o	User-friendly messages or fallback UI elements are displayed in case of errors.
+•	Backend
+o	The backend handles errors related to API rate limiting, failed API requests, or Redis connection issues.
+o	Errors are logged, and appropriate HTTP error responses are returned to the frontend.
+9. Logging and Monitoring
+•	Backend
+o	Logs important events, such as API requests, cache hits/misses, and errors.
+o	Uses monitoring tools to track application performance and ensure that API rate limits are not exceeded.
+•	Frontend
+o	Logs client-side errors and performance metrics to help diagnose issues with rendering or data fetching.
+10. Deployment and Scaling
+•	Containerization
+o	Both the frontend and backend are containerized using Docker, allowing for consistent and scalable deployment across different environments.
+o	Docker Compose is used to manage multi-container deployments, including services for Redis and MongoDB.
+•	Scalability
+o	The application is designed to scale horizontally, with multiple instances of the backend handling incoming requests and WebSocket connections.
+o	Load balancing is employed to distribute traffic across backend instances.
+11. User Interaction
+•	Interactive UI
+o	The user can interact with the graph, such as hovering over specific dates to see detailed contribution information.
+o	The frontend may provide options to filter contributions by type (e.g., commits vs. pull requests) or to view different time ranges.
+12. Maintenance
+•	Scheduled Cache Invalidation
+o	The backend periodically invalidates cached data to ensure that the contribution graph reflects the most up-to-date information.
+o	Old or stale data is removed from Redis based on a pre-configured expiration policy.
+

@@ -1,7 +1,8 @@
-import React from 'react';
-
-
 const ContributionStats = ({ data }) => {
+    if (!data || !data.commits || !data.pullRequests || !data.issues) {
+        return <div>No data available.</div>;
+    }
+
     const totalContributions = data.commits.length + data.pullRequests.length + data.issues.length;
     const mostActiveDay = data.dates[data.contributions.indexOf(Math.max(...data.contributions))];
 
@@ -13,4 +14,4 @@ const ContributionStats = ({ data }) => {
     );
 };
 
-export default ContributionStats;
+export default ContributionStats; 

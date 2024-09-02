@@ -1,54 +1,40 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const axios = require('axios');
-const cron = require('node-cron');
-const { fetchGitHubEvents, processAndAggregateData } = require('./utils/githubHelpers');
+const cors = require('cors');
+const connectDB = require('./config/dbConfig');
+const websocket = require('./websocket');
+const { createServer } = require('http');
 
+// Initialize Express
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+const httpServer = createServer(app);
 
-const PORT = process.env.PORT || 5000;
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-// WebSocket connection
-io.on('connection', (socket) => {
-    console.log('A client connected via WebSocket');
+// Connect to MongoDB
+connectDB();
 
-    // Listen for disconnection
-    socket.on('disconnect', () => {
-        console.log('Client disconnected');
-    });
-});
+// Import contributionRoutes after other setup is done
+const contributionRoutes = require('./routes/contributionRoutes');
 
-// Periodically poll GitHub for new contributions
-cron.schedule('* * * * *', async () => {  // This runs every minute
-    console.log('Polling GitHub for new contributions...');
+// API Routes
+app.use('/api/contributions', contributionRoutes);
 
-    // Fetch and process GitHub events
-    const username = 'your-github-username'; // Replace with your GitHub username
-    const events = await fetchGitHubEvents(username);
-    const aggregatedData = processAndAggregateData(events);
-
-    // Broadcast the updated data to all connected clients
-    io.emit('update', aggregatedData);
-});
-
-// GitHub webhook endpoint
-app.post('/webhook', (req, res) => {
-    console.log('Received GitHub webhook event');
-    const events = req.body;
-
-    // Process and aggregate the events
-    const aggregatedData = processAndAggregateData(events);
-
-    // Broadcast the updated data to all connected clients
-    io.emit('update', aggregatedData);
-
-    res.status(200).send('Webhook received');
-});
+// Initialize WebSocket
+websocket(httpServer);
 
 // Start the server
-server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const PORT = process.env.PORT || 5000;
+httpServer.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+// Module export at the end
+module.exports = {
+  contributionRoutes 
+};
+
+console.log(__dirname) or console.log(process.cwd())

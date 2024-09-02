@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
-import { GitHubUsernameInput, ContributionHeatmap } from './components';
+import { GitHubUsernameInput, ContributionHeatmap } from '.';
 import useAlert from '../hooks/useAlert';
 
 const GitHubContributionFetcher = () => {
