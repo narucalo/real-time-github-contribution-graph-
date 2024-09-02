@@ -1,23 +1,22 @@
-# Use an official Node.js runtime as the base image
-FROM node:14
-
-# Set the working directory inside the container
+# Use the official Python image from the Docker Hub
+FROM python:3.11-slim
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json files
-COPY package*.json ./
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-# Install the dependencies
-RUN npm install
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application files
+# Copy the current directory contents into the container at /app
 COPY . .
 
-# Change the working directory to /app/src
-WORKDIR /app/src
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
 
-# Expose the backend port
-EXPOSE 5000
+# Define environment variable
+ENV PYTHONUNBUFFERED=1
 
-# Start the application
-CMD ["node", "index.js"]
+# Run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

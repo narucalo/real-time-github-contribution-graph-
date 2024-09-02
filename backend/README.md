@@ -1,1 +1,0 @@
-npm install express axios mongoose redis socket.io dotenv cors nodemon --save-devFrontend Dependencies (React.js)

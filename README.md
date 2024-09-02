@@ -1,69 +1,67 @@
 # Real-Time GitHub Contribution Graph
 
-## Project Overview
-
-The Real-Time GitHub Contribution Graph is a web application that visualizes GitHub contributions in real-time. The project includes both frontend and backend components, and leverages technologies like React.js, Node.js, Express.js, MongoDB, Redis, and Docker. The backend fetches contribution data from the GitHub API, processes it, and provides real-time updates to the frontend using WebSockets.
-
 ## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Technologies Used](#technologies-used)
+- [Overview](#overview)
 - [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Setup](#setup)
   - [Prerequisites](#prerequisites)
-  - [Clone the Repository](#clone-the-repository)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-  - [Docker Setup](#docker-setup)
-- [Usage](#usage)
+  - [Installation](#installation)
+  - [Running the Project](#running-the-project)
 - [API Endpoints](#api-endpoints)
-- [WebSocket Communication](#websocket-communication)
-- [Error Handling](#error-handling)
+- [WebSocket Integration](#websocket-integration)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Technologies Used
-
-### Frontend
-
-- React.js
-- D3.js
-- Axios
-- Socket.io-client
-- Styled-components
-
-### Backend
-
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Redis
-- Axios
-- Socket.io
-- Docker
-
-### Tools
-
-- Docker & Docker Compose
-- GitHub API
-- WebSockets
-- ESLint (Airbnb Config)
-- Jest
+## Overview
+The Real-Time GitHub Contribution Graph is a web application that visualizes GitHub contributions in real-time. It tracks contributions such as commits, pull requests, issues, and code reviews for a specified GitHub repository or user, and displays this data in a visually appealing and interactive graph.
 
 ## Features
+- **Real-Time Data**: Visualize contributions as they happen, using WebSocket for real-time updates.
+- **RESTful API**: Fetch GitHub contribution data through a well-defined API.
+- **Interactive Graph**: Utilize D3.js and Chart.js for dynamic and interactive data visualization.
+- **Containerized Deployment**: Deploy the application using Docker for consistent and portable execution across environments.
 
-- **Real-Time Contribution Visualization**: Visualizes GitHub contributions in real-time using a heatmap.
-- **WebSocket Integration**: Enables real-time updates of contributions without refreshing the page.
-- **Caching with Redis**: Caches contribution data to reduce API requests to GitHub.
-- **Responsive UI**: Ensures the UI works well on various devices and screen sizes.
-- **Error Handling**: Both frontend and backend handle errors gracefully with user-friendly messages.
+## Architecture
+The project is divided into two main components:
+1. **Backend**: Built with FastAPI (Python), it handles the API requests, manages WebSocket connections, and interacts with the MongoDB and Redis databases.
+2. **Frontend**: A React application that fetches data from the backend and displays it on a real-time interactive graph.
 
-cd backend 
-npm install
+## Tech Stack
+- **Backend**:
+  - FastAPI (Python)
+  - MongoDB (Database)
+  - Redis (Caching)
+  - Docker (Containerization)
+  - Uvicorn (ASGI server)
+- **Frontend**:
+  - React
+  - Vite
+  - D3.js and Chart.js (Data Visualization)
+  - WebSocket
 
-cd frontend
-npm install
+## Setup
+
+### Prerequisites
+- **Docker**: Ensure Docker is installed on your system.
+- **Git**: Git must be installed to clone the repository.
+
+### Installation
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/real-time-github-contribution-graph.git
+   cd real-time-github-contribution-graph
 
 
+Create a .env file in the backend directory with the following content:
+MONGO_URI=mongodb://mongo:27017/github-contributions
+REDIS_URL=redis://redis:6379
+GITHUB_API_TOKEN=your_github_api_token_here
+
+
+### Additional Notes
+- Replace the `yourusername` placeholder in the Git clone command with your actual GitHub username.
+- Replace `your_github_api_token_here` in the `.env` file with your actual GitHub API token.
+
+This `README.md` provides an overview of the project, instructions for setup and deployment, and details about the technology stack used.
